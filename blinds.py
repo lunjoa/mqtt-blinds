@@ -33,7 +33,7 @@ class Cover:
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
-        self.client.username_pw_set(os.environ.get('MQTT_USER', os.environ.get('MQTT_PASSWORD'))
+        self.client.username_pw_set(os.environ.get('MQTT_USER'), os.environ.get('MQTT_PASSWORD'))
         self.client.connect(MQTT_SERVER, MQTT_PORT, 60)
         self.client.loop_forever()
 
