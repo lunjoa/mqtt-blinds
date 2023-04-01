@@ -3,9 +3,11 @@ import paho.mqtt.client as mqtt
 import RPi.GPIO as GPIO
 import os
 
-MQTT_SERVER = os.environ.get('MQTT_SERVER')
+MQTT_SERVER = os.environ['MQTT_SERVER']
 MQTT_PATH = "home-assistant/cover/#"
-MQTT_PORT = os.environ.get('MQTT_PORT')
+MQTT_PORT = os.environ['MQTT_PORT']
+MQTT_USER = os.environ['MQTT_USER']
+MQTT_PASSWORD = os.environ['MQTT_PASSWORD']
 UP_BUTTON_PIN = 6
 DOWN_BUTTON_PIN = 13
 SELECT_BUTTON_PIN = 5
@@ -33,7 +35,7 @@ class Cover:
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
-        self.client.username_pw_set(os.environ.get('MQTT_USER'), os.environ.get('MQTT_PASSWORD'))
+        self.client.username_pw_set(MQTT_USER, MQTT_PASSWORD)
         self.client.connect(MQTT_SERVER, MQTT_PORT, 60)
         self.client.loop_forever()
 
